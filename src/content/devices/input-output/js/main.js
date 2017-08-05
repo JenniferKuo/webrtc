@@ -8,6 +8,10 @@
 
 'use strict';
 
+fullscreen.addEventListener('click', function () {
+    document.documentElement.webkitRequestFullScreen();
+}, false);
+
 var videoElement = document.querySelector('video');
 // var audioInputSelect = document.querySelector('select#audioSource');
 // var audioOutputSelect = document.querySelector('select#audioOutput');
