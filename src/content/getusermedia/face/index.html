@@ -18,25 +18,22 @@
     html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
     body {font-family: 'Helvetica';background-color: #000000; }
     a:link { color: #ffffff; } a:visited {color: #ffffff; }
-
-    #localCanvas {
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-
-    #localVideo {
-      display: block;
-      position: absolute;
-      top: 0;
+    #localVideo,#localCanvas{
+      position: absolute; 
+      right: 0; 
       bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
+      min-width: 100%; 
+      min-height: 100%;
+      width: auto; 
+      height: auto; 
+      z-index: -100;
+      background-size: cover;
+      overflow: hidden;
+      margin: 0;
+    }
+    #localVideo{
       -webkit-transition-property: opacity;
-      -webkit-transition-duration: 2s;
+      -webkit-transition-duration: 0.5s;
       opacity: 0;
     }
     #logo {
@@ -124,7 +121,10 @@ poll = function() {
     //ctx2.strokeStyle = "rgba(255,0,0," + opacity * 255 + ")";
     ctx2.lineWidth = opacity * 10;
     ctx2.strokeStyle = "rgb(255,0,0)";
-    ctx2.strokeRect(comp[i].x, comp[i].y, comp[i].width, comp[i].height);
+    var img = new Image();
+    img.src="melon.png";
+    ctx2.drawImage(img,comp[i].x-(comp[i].width*0.2), comp[i].y-(comp[i].height*0.2), comp[i].width*1.5, comp[i].height*1.5);
+    // ctx2.strokeRect(comp[i].x, comp[i].y, comp[i].width, comp[i].height);
   }
   setTimeout(poll, 1000);
 }
@@ -150,6 +150,5 @@ setTimeout(initialize, 1);
 
 <video id="localVideo" autoplay muted></video>
 <canvas width="1000" height="1000" id="localCanvas"></canvas>
-<a href="http://liuliu.me/eyes/javascript-face-detection-explained"><div id="credit">JS Face Detect by Liu Liu</div></a>
 </body>
 </html>

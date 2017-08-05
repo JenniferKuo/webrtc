@@ -10,21 +10,13 @@
 <head>
 
   <meta charset="utf-8">
-  <meta name="description" content="WebRTC code samples">
   <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
-  <meta itemprop="description" content="Client-side WebRTC code samples">
-  <meta itemprop="image" content="../../../images/webrtc-icon-192x192.png">
   <meta itemprop="name" content="WebRTC code samples">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta id="theme-color" name="theme-color" content="#ffffff">
 
   <base target="_blank">
 
   <title>Select audio and video sources</title>
-
-  <link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png">
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="../../../css/main.css">
 
   <style>
     html, body {
@@ -42,28 +34,56 @@
       width: 12em;
       display: inline-block;
     }
-    #video {
-      /*width: 100vw;
-      height: 100vh;*/
+    #video,#canvas{
       position: absolute; 
-    right: 0; 
-    bottom: 0;
-    min-width: 100%; 
-    min-height: 100%;
-    width: auto; 
-    height: auto; 
-    z-index: -100;
-    background-size: cover;
-    overflow: hidden;
-    margin: 0;
+      right: 0; 
+      bottom: 0;
+      min-width: 100%; 
+      min-height: 100%;
+      width: auto; 
+      height: auto; 
+      z-index: -100;
+      background-size: cover;
+      overflow: hidden;
+      margin: 0;
     }
+    #video {
+      -webkit-transition-property: opacity;
+      /*-webkit-transition-duration: 2s;*/
+      opacity: 0;
+    }
+/*    #canvas {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    #video {
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-transition-property: opacity;
+      -webkit-transition-duration: 2s;
+      opacity: 0;
+    }*/
   </style>
+  <script type="text/javascript" src="../../../js/lib/ccv.js"></script>
+  <script type="text/javascript" src="../../../js/lib/face.js"></script>
 
 </head>
 
 <body>
+  <div>
     <video id="video" autoplay></video>
-    <div class="select">
+    <canvas id="canvas"></canvas>
+  </div>
+    <div id="videoSelect" class="select">
       <label for="videoSource">Video source: </label><select id="videoSource"></select>
     </div>
     <button id="fullscreen">full</button>
@@ -74,14 +94,9 @@
     <div class="select" style="visibility: hidden">
       <label for="audioOutput">Audio output destination: </label><select id="audioOutput"></select>
     </div>
-<!--     <p class="small"><b>Note:</b> If you hear a reverb sound your microphone is picking up the output of your speakers/headset, lower the volume and/or move the microphone further away from your speakers/headset.</p>
-
-    <a href="https://github.com/webrtc/samples/tree/gh-pages/src/content/devices/input-output" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a> -->
-
-  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="../../../js/adapter-latest.js"></script>
   <script src="../../../js/common.js"></script>
   <script src="js/main.js"></script>
-
   <script src="../../../js/lib/ga.js"></script>
 </body>
 </html>
