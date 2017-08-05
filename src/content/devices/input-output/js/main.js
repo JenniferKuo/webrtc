@@ -29,8 +29,8 @@ function gotDevices(deviceInfos) {
     var option = document.createElement('option');
     option.value = deviceInfo.deviceId;
     if (deviceInfo.kind === 'audioinput') {
-      option.text = deviceInfo.label ||
-          'microphone ' + (audioInputSelect.length + 1);
+      // option.text = deviceInfo.label ||
+          // 'microphone ' + (audioInputSelect.length + 1);
       // audioInputSelect.appendChild(option);
     } else if (deviceInfo.kind === 'audiooutput') {
       // option.text = deviceInfo.label || 'speaker ' +
