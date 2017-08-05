@@ -9,11 +9,11 @@
 'use strict';
 
 var videoElement = document.querySelector('video');
-var audioInputSelect = document.querySelector('select#audioSource');
-var audioOutputSelect = document.querySelector('select#audioOutput');
+// var audioInputSelect = document.querySelector('select#audioSource');
+// var audioOutputSelect = document.querySelector('select#audioOutput');
 var videoSelect = document.querySelector('select#videoSource');
-var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
-
+// var selectors = [audioInputSelect, audioOutputSelect, videoSelect];
+var selectors = [videoSelect];
 function gotDevices(deviceInfos) {
   // Handles being called several times to update labels. Preserve values.
   var values = selectors.map(function(select) {
@@ -31,11 +31,11 @@ function gotDevices(deviceInfos) {
     if (deviceInfo.kind === 'audioinput') {
       option.text = deviceInfo.label ||
           'microphone ' + (audioInputSelect.length + 1);
-      audioInputSelect.appendChild(option);
+      // audioInputSelect.appendChild(option);
     } else if (deviceInfo.kind === 'audiooutput') {
-      option.text = deviceInfo.label || 'speaker ' +
-          (audioOutputSelect.length + 1);
-      audioOutputSelect.appendChild(option);
+      // option.text = deviceInfo.label || 'speaker ' +
+          // (audioOutputSelect.length + 1);
+      // audioOutputSelect.appendChild(option);
     } else if (deviceInfo.kind === 'videoinput') {
       option.text = deviceInfo.label || 'camera ' + (videoSelect.length + 1);
       videoSelect.appendChild(option);
@@ -51,6 +51,8 @@ function gotDevices(deviceInfos) {
     }
   });
 }
+
+
 
 navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
 
@@ -76,10 +78,10 @@ function attachSinkId(element, sinkId) {
   }
 }
 
-function changeAudioDestination() {
-  var audioDestination = audioOutputSelect.value;
-  attachSinkId(videoElement, audioDestination);
-}
+// function changeAudioDestination() {
+//   var audioDestination = audioOutputSelect.value;
+//   attachSinkId(videoElement, audioDestination);
+// }
 
 function gotStream(stream) {
   window.stream = stream; // make stream available to console
@@ -94,18 +96,20 @@ function start() {
       track.stop();
     });
   }
-  var audioSource = audioInputSelect.value;
+  // var audioSource = audioInputSelect.value;
   var videoSource = videoSelect.value;
+
+
   var constraints = {
-    audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
+    // audio: {deviceId: audioSource ? {exact: audioSource} : undefined},
     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
   };
   navigator.mediaDevices.getUserMedia(constraints).
       then(gotStream).then(gotDevices).catch(handleError);
 }
 
-audioInputSelect.onchange = start;
-audioOutputSelect.onchange = changeAudioDestination;
+// audioInputSelect.onchange = start;
+// audioOutputSelect.onchange = changeAudioDestination;
 videoSelect.onchange = start;
 
 start();
